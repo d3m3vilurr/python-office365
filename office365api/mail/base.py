@@ -58,8 +58,8 @@ class Base(Api):
         :param message: Message object.
         :return: Attachment collection. It is also added to message as side effect.
         """
-        if not message.HasAttachments:
-            return []
+        #if not message.HasAttachments:
+        #    return []
         response = self.connection.get(url=self.ATTACHMENT_URL.format(id=message.Id))
         data = response.json()
         message.Attachments = [Attachment.factory(a) for a in data.get('value', [])] \
