@@ -33,12 +33,13 @@ class Cal(Base):
             return self._calendar_name
         raise ValueError('Unknown calendar id')
 
-    def get_events(self, select=None,
-                   filters=None,
-                   search=None,
-                   start=None,
-                   end=None,
-                   order_by=None,
+    def get_events(self,
+                   #select=None,
+                   #filters=None,
+                   #search=None,
+                   start,
+                   end,
+                   #order_by=None,
                    top=50,
                    skip=0):
         """
@@ -65,12 +66,12 @@ class Cal(Base):
         :param skip: How many messages to skip. Default 0.
         """
         return self.get_events_from_calendar(calendar=self.calendar_id,
-                                             select=select,
-                                             filters=filters,
-                                             search=search,
+                                             #select=select,
+                                             #filters=filters,
+                                             #search=search,
                                              start=start,
                                              end=end,
-                                             order_by=order_by,
+                                             #order_by=order_by,
                                              top=top,
                                              skip=skip)
 

@@ -3,16 +3,20 @@ from office365api.model.model import Model
 
 class Event(Model):
 
-    select = ['Subject', 'Body', 'Start', 'End', 'Reminder', 'Location', 'Attendees', 'Organizer', 'iCalUId', 'HasAttachments']
+    select = ['Subject', 'Body', 'DateTimeCreated', 'DateTimeLastModified',
+              'Start', 'End', 'Reminder', 'Location', 'Attendees', 'Organizer', 'iCalUId', 'HasAttachments']
 
     def __init__(self, Subject, Body,
-                 HasAttachments=False, Id=None, Start=None, End=None,
+                 HasAttachments=False, Id=None, DateTimeCreated=None, DateTimeLastModified=None,
+                 Start=None, End=None,
                  Reminder=None, Location=None, Attendees=None,
                  Organizer=None):
         self.Id = Id
         self.Subject = Subject
         self.Body = Body
         self.HasAttachments = HasAttachments
+        self.DateTimeCreated = DateTimeCreated
+        self.DateTimeLastModified = DateTimeLastModified
         self.Start = Start
         self.End = End
         self.Reminder = Reminder

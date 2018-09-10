@@ -4,6 +4,7 @@ from office365api.connection import Connection
 class Api(object):
     BASE_URL = 'https://outlook.office365.com/api/v1.0/me'
     CALENDAR_URL = BASE_URL + '/calendars/{calendar_id}'
+    CALENDAR_VIEW_URL = CALENDAR_URL + '/calendarview'
     EVENTS_URL = CALENDAR_URL + '/events'
     EVENT_URL = BASE_URL + '/events/{events_id}'
 

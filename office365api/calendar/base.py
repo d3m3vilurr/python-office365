@@ -6,36 +6,39 @@ class Base(Api):
 
     def get_events_from_calendar(self,
                                  calendar,
-                                 select=None,
-                                 filters=None,
-                                 search=None,
-                                 start=None,
-                                 end=None,
-                                 order_by=None,
+                                 #select=None,
+                                 #filters=None,
+                                 #search=None,
+                                 start,
+                                 end,
+                                 #order_by=None,
                                  top=100,
                                  skip=0):
-        url = self.EVENTS_URL.format(calendar_id=calendar)
+        url = self.CALENDAR_VIEW_URL.format(calendar_id=calendar)
 
-        select = select or []
-        select.extend(Event.parameters())
-        print(top)
-        params = {'$select': (','.join(select)), '$top': top, '$skip': skip}
+        #select = select or []
+        #select.extend(Event.parameters())
+        #print(top)
+        #params = {'$select': (','.join(select)), '$top': top, '$skip': skip}
+        params = {}
 
         def add(k, v):
             if v:
                 params[k] = v
 
         # Search must be surrounded by quotes
-        add('$search', '"{}"'.format(search) if search else None)
-        add('$filter', filters)
-        add('$orderby', order_by)
-        add('$startDateTime', start)
-        add('$endDateTime', end)
+        #add('$search', '"{}"'.format(search) if search else None)
+        #add('$filter', filters)
+        #add('$orderby', order_by)
+        add('startDateTime', start)
+        add('endDateTime', end)
+        add('top', top)
+        add('skip', skip)
 
         # search override
-        if search:
-            for key in ['$skip', '$filter', '$orderby']:
-                params.pop(key, None)
+        #if search:
+        #    for key in ['$skip', '$filter', '$orderby']:
+        #        params.pop(key, None)
 
         response = self.connection.get(url=url, params=params)
         data = response.json()
